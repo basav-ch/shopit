@@ -25,7 +25,7 @@ const publicDir = path.join(process.cwd(),"public")
 if(fs.existsSync(publicDir)){
   app.use(express.static(publicDir))
 
-  app.get("*", (req,res,next)=>{
+  app.get("/{*any}", (req,res,next)=>{
     if(req.method !== "GET" && req.method !== "HEAD"){
       next();
       return;
