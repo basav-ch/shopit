@@ -33,7 +33,7 @@ RUN npm install --omit=dev --no-audit --no-fund && npm cache clean --force
 COPY --from=backend-build /app/dist ./dist
 COPY --from=frontend-build /app/frontend/dist ./public
 
-EXPOSE 3001
+EXPOSE 10000
 USER node
 
 CMD ["node", "dist/index.js"]
