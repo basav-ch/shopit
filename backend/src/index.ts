@@ -24,7 +24,7 @@ app.get("/health", (_req, res) => {
 
 app.use(express.json());
 app.use(cors());
-app.use(clerkMiddleware);
+
 
 const publicDir = path.join(process.cwd(),"public")
 
@@ -72,6 +72,8 @@ if(fs.existsSync(publicDir)){
     res.sendFile(path.join(publicDir, "index.html"), (err)=>next(err));
   })
 }
+
+app.use(clerkMiddleware);
 
 console.log("process.env.PORT =", process.env.PORT);
 console.log("env.PORT =", env.PORT);
