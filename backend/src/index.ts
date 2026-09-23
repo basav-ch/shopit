@@ -26,6 +26,9 @@ app.use(cors());
 app.use(clerkMiddleware);
 
 const publicDir = path.join(process.cwd(),"public")
+console.log("Current directory:", process.cwd());
+console.log("Public directory:", publicDir);
+console.log("Public exists:", fs.existsSync(publicDir));
 if(fs.existsSync(publicDir)){
   app.use(express.static(publicDir))
 
