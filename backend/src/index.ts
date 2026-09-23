@@ -27,6 +27,18 @@ app.use(cors());
 app.use(clerkMiddleware);
 
 const publicDir = path.join(process.cwd(),"public")
+
+const indexPath = path.join(publicDir, "index.html");
+
+console.log("index.html exists:", fs.existsSync(indexPath));
+
+if (fs.existsSync(indexPath)) {
+  console.log(
+    "index.html content:",
+    fs.readFileSync(indexPath, "utf8")
+  );
+}
+
 console.log("Current directory:", process.cwd());
 console.log("Public directory:", publicDir);
 console.log("Public exists:", fs.existsSync(publicDir));
@@ -37,7 +49,7 @@ if(fs.existsSync(publicDir)){
     console.log("SERVING INDEX.HTML");
     res.sendFile(path.join(publicDir, "index.html"));
   });
-  
+
   app.use(express.static(publicDir))
 
   console.log("Public files:", fs.readdirSync(publicDir));
