@@ -29,8 +29,15 @@ const publicDir = path.join(process.cwd(),"public")
 console.log("Current directory:", process.cwd());
 console.log("Public directory:", publicDir);
 console.log("Public exists:", fs.existsSync(publicDir));
+
 if(fs.existsSync(publicDir)){
   app.use(express.static(publicDir))
+
+  console.log("Public files:", fs.readdirSync(publicDir));
+  console.log(
+    "index.html exists:",
+    fs.existsSync(path.join(publicDir, "index.html"))
+  );
 
   app.get("/{*any}", (req,res,next)=>{
     if(req.method !== "GET" && req.method !== "HEAD"){
