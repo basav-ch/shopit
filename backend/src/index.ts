@@ -21,10 +21,6 @@ app.get("/health", (_req, res) => {
   res.status(200).send("OK");
 });
 
-app.get("/", (_req, res) => {
-  console.log("ROOT REQUEST RECEIVED");
-  res.send("ROOT WORKS");
-});
 
 app.use(express.json());
 app.use(cors());
@@ -36,6 +32,12 @@ console.log("Public directory:", publicDir);
 console.log("Public exists:", fs.existsSync(publicDir));
 
 if(fs.existsSync(publicDir)){
+
+  app.get("/", (_req, res) => {
+    console.log("SERVING INDEX.HTML");
+    res.sendFile(path.join(publicDir, "index.html"));
+  });
+  
   app.use(express.static(publicDir))
 
   console.log("Public files:", fs.readdirSync(publicDir));
