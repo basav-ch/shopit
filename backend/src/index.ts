@@ -17,6 +17,10 @@ app.post("/webhooks/clerk", rawJson, (req, res) => {
   void clerkWebhookHandler(req, res);
 });
 
+app.get("/health", (_req, res) => {
+  res.status(200).send("OK");
+});
+
 app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware);
@@ -43,8 +47,5 @@ if(fs.existsSync(publicDir)){
 console.log("process.env.PORT =", process.env.PORT);
 console.log("env.PORT =", env.PORT);
 
-app.get("/health", (_req, res) => {
-  res.status(200).send("OK");
-});
 
 app.listen(env.PORT,'0.0.0.0', () => console.log("listening on port: ",env.PORT));
